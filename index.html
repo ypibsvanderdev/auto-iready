@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vander i-Ready AI Solver | Premium Automation</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="dark-theme">
+    <div class="background-glow"></div>
+
+    <nav class="glass-nav">
+        <div class="logo">
+            <span class="vander-text">VANDER</span>
+            <span class="sub-text">AI SOLVER</span>
+        </div>
+        <div class="status-indicator">
+            <div class="dot pulsing"></div>
+            <span>System Active</span>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <header class="hero-section">
+            <h1>Automate <span class="gradient-text">i-Ready</span> with Precision</h1>
+            <p class="subtitle">Next-generation AI integration for seamless educational automation.</p>
+        </header>
+
+        <div class="grid-layout">
+            <!-- Control Panel -->
+            <section class="glass-card control-panel">
+                <div class="card-header">
+                    <img src="https://img.icons8.com/isometric/50/automatic.png" alt="settings" />
+                    <h2>Direct Control</h2>
+                </div>
+
+                <div class="control-group">
+                    <label class="switch-container">
+                        <span class="label-text">Auto-Solve</span>
+                        <input type="checkbox" id="autoSolveToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <p class="description">Automatically clicks the correct answer once identified.</p>
+                </div>
+
+                <div class="control-group">
+                    <label class="switch-container">
+                        <span class="label-text">Stealth Mode</span>
+                        <input type="checkbox" id="stealthMode" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <p class="description">Adds randomized delays to mimic human behavior.</p>
+                </div>
+
+                <div class="api-key-section">
+                    <label for="apiKey">AI Backend Key</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="apiKey" placeholder="Enter Gemini API Key...">
+                        <button class="icon-btn" id="saveKey">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Status Panel -->
+            <section class="glass-card status-panel">
+                <div class="card-header">
+                    <img src="https://img.icons8.com/isometric/50/combo-chart.png" alt="stats" />
+                    <h2>Live Statistics</h2>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value" id="correctCount">0</span>
+                        <span class="stat-label">Solved</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="accuracy">100%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                </div>
+
+                <div class="console-output" id="consoleOutput">
+                    <div class="line system">[SYSTEM] Vander AI Solver v1.0.4 loaded.</div>
+                    <div class="line info">[INFO] Waiting for i-Ready connection...</div>
+                </div>
+            </section>
+
+            <!-- Connection Panel -->
+            <section class="glass-card connection-panel full-width">
+                <div class="card-header">
+                    <img src="https://img.icons8.com/isometric/50/bookmark-ribbon.png" alt="bookmark" />
+                    <h2>Chromebook "No Console" Method</h2>
+                </div>
+                <div class="method-steps">
+                    <p>Since school Chromebooks often disable the (F12) console, use the <strong>Bookmarklet
+                            Method</strong>:</p>
+                    <ol>
+                        <li>Press <strong>Ctrl + D</strong> on this page to create a bookmark.</li>
+                        <li>Click <strong>More...</strong> or <strong>Edit</strong>.</li>
+                        <li>Change the Name to: <code class="neon-text">Vander Solver</code></li>
+                        <li>Paste the code below into the <strong>URL</strong> field:</li>
+                    </ol>
+                </div>
+
+                <div class="code-box">
+                    <pre><code id="payloadSnippet">javascript:(function(){const s=document.createElement('script');s.src='http://localhost:3000/engine.js?v='+Date.now();document.body.appendChild(s);})();</code></pre>
+                    <button class="copy-btn" id="copyPayload">Copy Bookmark Code</button>
+                </div>
+
+                <p class="warning-text">⚠️ <strong>Usage:</strong> Go to your i-Ready tab, then click the "Vander
+                    Solver" bookmark in your bookmarks bar to activate.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="glass-footer">
+        <p>&copy; 2026 VANDER HUB. Developed for educational research purposes.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

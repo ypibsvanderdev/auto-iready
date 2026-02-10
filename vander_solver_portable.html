@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vander i-Ready All-In-One | Chromebook Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #05070a;
+            --accent-primary: #00f2ff;
+            --accent-secondary: #ff00ea;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --success: #00ff88;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .background-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 234, 0.1) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .instruction-box {
+            text-align: left;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-primary);
+        }
+
+        ol {
+            margin-left: 1.5rem;
+            color: var(--text-dim);
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+
+        .bookmark-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            color: black;
+            font-weight: 800;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            cursor: move;
+            /* Indicates you can drag it */
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+            margin: 1rem 0;
+        }
+
+        .bookmark-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+        }
+
+        .code-area {
+            background: #0d1117;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #8b949e;
+            word-break: break-all;
+            margin-top: 1rem;
+            border: 1px solid var(--glass-border);
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        .warning {
+            color: #ff9d00;
+            font-size: 0.85rem;
+            margin-top: 2rem;
+            font-style: italic;
+        }
+
+        .footer {
+            margin-top: auto;
+            padding: 2rem;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-glow"></div>
+
+    <header>
+        <h1>VANDER <span class="gradient-text">TAKEOVER</span></h1>
+        <p>Portable i-Ready Automation for Chromebooks</p>
+    </header>
+
+    <div class="card">
+        <h2>Portable Launcher</h2>
+        <p>This file allows you to "take over" your i-Ready tab even on restricted Chromebooks.</p>
+
+        <div class="instruction-box">
+            <h3>How to use:</h3>
+            <ol>
+                <li><strong>Drag</strong> the button below to your <strong>Bookmarks Bar</strong> (Ctrl + Shift + B to
+                    show it).</li>
+                <li>Go to your <strong>i-Ready Lesson</strong> tab.</li>
+                <li>Click the <strong>"Vander Solver"</strong> bookmark you just dragged.</li>
+                <li>The AI will start finding and clicking answers automatically.</li>
+            </ol>
+        </div>
+
+        <!-- Drag this Link -->
+        <a href="javascript:(function(){const s=document.createElement('script');s.src='http://localhost:3000/engine.js';document.body.appendChild(s);})();"
+            class="bookmark-btn">
+            DRAG ME TO BOOKMARKS
+        </a>
+
+        <div class="code-area" id="rawCode">
+            javascript:(function(){const
+            s=document.createElement('script');s.src='http://localhost:3000/engine.js';document.body.appendChild(s);})();
+        </div>
+
+        <p class="warning">Note: Keep the Vander Dashboard tab open in the background so the server stays active.</p>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 VANDER HUB // PROTECT YOUR EDUCATION
+    </div>
+</body>
+
+</html>
