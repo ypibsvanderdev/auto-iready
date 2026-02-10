@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vander i-Ready All-In-One | GitHub Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #05070a;
+            --accent-primary: #00f2ff;
+            --accent-secondary: #ff00ea;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --success: #00ff88;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .background-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 234, 0.1) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header { text-align: center; margin-bottom: 3rem; }
+        h1 { font-size: 3rem; font-weight: 800; }
+        .gradient-text {
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .config-box {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        label { display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-weight: 600; }
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-family: inherit;
+            margin-bottom: 1rem;
+        }
+
+        .bookmark-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            color: black;
+            font-weight: 800;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            cursor: move;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+            margin: 1rem 0;
+        }
+
+        .bookmark-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+        }
+
+        .code-area {
+            background: #0d1117;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #8b949e;
+            word-break: break-all;
+            margin-top: 1rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .done-text { color: var(--success); font-weight: bold; display: none; margin-top: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="background-glow"></div>
+
+    <header>
+        <h1>VANDER <span class="gradient-text">PORTABLE</span></h1>
+        <p>GitHub-Powered AI i-Ready Solver</p>
+    </header>
+
+    <div class="card">
+        <h2>GitHub Configuration</h2>
+        <p>Enter your GitHub info to generate your custom Chromebook bookmark.</p>
+
+        <div class="config-box">
+            <label for="ghLink">Your engine.js GitHub Link</label>
+            <input type="text" id="ghLink" placeholder="https://yourname.github.io/your-repo/engine.js" oninput="updateLink()">
+            <p style="font-size: 0.8rem; color: var(--text-dim);">Paste the link to your raw <code>engine.js</code> file from GitHub Pages.</p>
+        </div>
+
+        <h3>1. Drag this to your Bar:</h3>
+        <a href="#" id="dragBtn" class="bookmark-btn">
+            VANDER SOLVER
+        </a>
+        <div id="doneMsg" class="done-text">Bookmark Ready! Drag it up!</div>
+
+        <div class="instruction-box" style="margin-top: 2rem; text-align: left; color: var(--text-dim);">
+            <h3>2. Go to i-Ready:</h3>
+            <p>Once you've dragged the button, just click it while on the i-Ready lesson page.</p>
+        </div>
+
+        <div class="code-area" id="rawCode">
+            Select a source above to see the code...
+        </div>
+    </div>
+
+    <script>
+        function updateLink() {
+            const link = document.getElementById('ghLink').value || 'https://yourname.github.io/repo/engine.js';
+            const payload = `javascript:(function(){const s=document.createElement('script');s.src='${link}?v='+Date.now();document.body.appendChild(s);})();`;
+            
+            const dragBtn = document.getElementById('dragBtn');
+            dragBtn.href = payload;
+            
+            document.getElementById('rawCode').textContent = payload;
+            document.getElementById('doneMsg').style.display = (document.getElementById('ghLink').value) ? 'block' : 'none';
+        }
+        
+        // Load saved link if exists
+        window.onload = () => {
+            const saved = localStorage.getItem('vander_gh_link');
+            if (saved) {
+                document.getElementById('ghLink').value = saved;
+                updateLink();
+            }
+        };
+
+        document.getElementById('ghLink').addEventListener('change', (e) => {
+            localStorage.setItem('vander_gh_link', e.target.value);
+        });
+    </script>
+</body>
+</html>
